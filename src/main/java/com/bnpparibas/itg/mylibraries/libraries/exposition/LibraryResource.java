@@ -25,7 +25,7 @@ public class LibraryResource {
         return this.libraryService.obtain(libraryId);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/}"})
+    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/"})
     public List<Library> listAllLibrairies() {
         return this.libraryService.listAll();
     }

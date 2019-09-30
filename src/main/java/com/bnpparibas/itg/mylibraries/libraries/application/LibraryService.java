@@ -17,8 +17,8 @@ public class LibraryService {
     @Autowired
     private LibraryDAO libraryDAO;
 
-    public Long create(Library library) {
-        this.libraryDAO.save(library);
+    public Long create(Library newLibrary) {
+        Library library = this.libraryDAO.save(newLibrary);
         return library.getId();
     }
 
