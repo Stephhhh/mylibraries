@@ -22,12 +22,6 @@ public class LibraryService {
         return library.getId();
     }
 
-    public void update(Long id, Library libraryWithNewInformations) {
-        Library library = obtain(id);
-        library.update(libraryWithNewInformations);
-        this.libraryDAO.save(library);
-    }
-
     public Library obtain(Long id) {
         return this.libraryDAO.findById(id).orElseThrow(() -> new MyAppBookException(ErrorCodes.LIBRARY_NOT_FOUND));
     }
@@ -36,7 +30,14 @@ public class LibraryService {
         return this.libraryDAO.findAll();
     }
 
+    public void update(Long id, Library libraryWithNewInformations) {
+        Library library = obtain(id);
+        library.update(libraryWithNewInformations);
+        this.libraryDAO.save(library);
+    }
+
     public void remove(Long id) {
-        this.libraryDAO.deleteById(id);
+        Library library = obtain(id);
+        this.libraryDAO.delete(library);
     }
 }

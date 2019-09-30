@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-@ControllerAdvice(basePackages = "com.bnpparibas.itg.mylibrary.library")
+@ControllerAdvice(basePackages = "com.bnpparibas.itg.mylibraries.libraries")
 public class MyExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyExceptionHandler.class);
