@@ -1,4 +1,4 @@
-package com.bnpparibas.itg.mylibraries.libraries.domain;
+package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

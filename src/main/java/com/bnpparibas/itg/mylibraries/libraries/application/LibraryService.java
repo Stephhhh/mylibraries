@@ -1,6 +1,6 @@
 package com.bnpparibas.itg.mylibraries.libraries.application;
 
-import com.bnpparibas.itg.mylibraries.libraries.domain.Library;
+import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryDAO;
