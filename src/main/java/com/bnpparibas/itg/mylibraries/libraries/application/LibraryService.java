@@ -3,6 +3,7 @@ package com.bnpparibas.itg.mylibraries.libraries.application;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
+import com.bnpparibas.itg.mylibraries.libraries.domain.library.LibraryRepository;
 import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,29 +16,28 @@ import java.util.List;
 public class LibraryService {
 
     @Autowired
-    private LibraryDAO libraryDAO;
+    private LibraryRepository libraryRepository;
 
     public Long create(Library newLibrary) {
-        Library library = this.libraryDAO.save(newLibrary);
-        return library.getId();
+        return this.libraryRepository.save(newLibrary);
     }
 
     public Library obtain(Long id) {
-        return this.libraryDAO.findById(id).orElseThrow(() -> new MyAppBookException(ErrorCodes.LIBRARY_NOT_FOUND));
+        return this.libraryRepository.get(id);
     }
 
     public List<Library> listAll() {
-        return this.libraryDAO.findAll();
+        return this.libraryRepository.findAll();
     }
 
     public void update(Long id, Library libraryWithNewInformations) {
         Library library = obtain(id);
         library.update(libraryWithNewInformations);
-        this.libraryDAO.save(library);
+        this.libraryRepository.save(library);
     }
 
     public void remove(Long id) {
         Library library = obtain(id);
-        this.libraryDAO.delete(library);
+        this.libraryRepository.delete(library);
     }
 }
