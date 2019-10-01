@@ -1,10 +1,7 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity(name = "LIBRARY")
 public class Library {
 
