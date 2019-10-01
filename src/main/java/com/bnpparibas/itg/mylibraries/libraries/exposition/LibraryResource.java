@@ -16,18 +16,18 @@ public class LibraryResource {
 
     @RequestMapping(method = RequestMethod.POST, path = {"/libraries/"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createLibrary(@RequestBody Library library) {
-        return this.libraryService.create(library);
+    public Long createLibrary(@RequestBody LibraryDTO libraryDTO) {
+        return this.libraryService.create(LibraryAdapter.transformToLibrary(libraryDTO));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = {"/libraries/{libraryId}"})
-    public Library detailLibrary(@PathVariable("libraryId") Long libraryId) {
-        return this.libraryService.obtain(libraryId);
+    public LibraryDTO detailLibrary(@PathVariable("libraryId") Long libraryId) {
+        return LibraryAdapter.adaptToBookDTO(this.libraryService.obtain(libraryId));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = {"/libraries/"})
-    public List<Library> listAllLibrairies() {
-        return this.libraryService.listAll();
+    public List<LibraryDTO> listAllLibrairies() {
+        return LibraryAdapter.adaptToLibraryDTO(this.libraryService.listAll());
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = {"/libraries/{libraryId}"})

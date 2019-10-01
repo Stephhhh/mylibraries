@@ -25,8 +25,7 @@ public class Book {
 
     private Book() {}
 
-    public Book(Long id, String title, String author, int numberOfPage, LiteraryGenre literaryGenre) {
-        this.id = id;
+    public Book(String title, String author, int numberOfPage, LiteraryGenre literaryGenre) {
         this.title = title;
         this.author = author;
         this.numberOfPage = numberOfPage;
