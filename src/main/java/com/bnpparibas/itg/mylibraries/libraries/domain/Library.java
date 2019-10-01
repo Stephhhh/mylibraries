@@ -1,4 +1,4 @@
-package com.bnpparibas.itg.mylibraries.libraries;
+package com.bnpparibas.itg.mylibraries.libraries.domain;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.bnpparibas.itg.mylibraries.libraries;
+package com.bnpparibas.itg.mylibraries.libraries.domain;
 
 public enum Type {
     ASSOCIATIVE,

@@ -1,5 +1,7 @@
-package com.bnpparibas.itg.mylibraries.libraries;
+package com.bnpparibas.itg.mylibraries.libraries.application;
 
+import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryDAO;
+import com.bnpparibas.itg.mylibraries.libraries.domain.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
