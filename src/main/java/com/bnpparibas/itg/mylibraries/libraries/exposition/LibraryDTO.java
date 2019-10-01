@@ -1,9 +1,11 @@
 package com.bnpparibas.itg.mylibraries.libraries.exposition;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.LiteraryGenre;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class LibraryDTO {
@@ -13,6 +15,7 @@ public class LibraryDTO {
     @JsonProperty
     AddressDTO addressDTO;
 
+    @NotNull(message = ErrorCodes.LIBRARY_MUST_HAVE_A_DIRECTOR)
     @JsonProperty
     DirectorDTO directorDTO;
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class LibraryResource {
 
     @RequestMapping(method = RequestMethod.POST, path = {"/libraries/"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createLibrary(@RequestBody LibraryDTO libraryDTO) {
+    public Long createLibrary(@Valid @RequestBody LibraryDTO libraryDTO) {
         return this.libraryService.create(LibraryAdapter.transformToLibrary(libraryDTO));
     }
 
