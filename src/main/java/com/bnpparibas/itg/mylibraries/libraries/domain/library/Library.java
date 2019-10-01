@@ -24,12 +24,18 @@ public class Library {
         this.address = address;
         this.director = director;
         this.books = books;
+        validate();
     }
 
     public void update(Library libraryWithNewInformation) {
         this.type = libraryWithNewInformation.getType();
         this.address = libraryWithNewInformation.getAddress();
         this.director = libraryWithNewInformation.getDirector();
+        validate();
+    }
+
+    private void validate() {
+        this.director.validate();
     }
 
     public Long getId() {
