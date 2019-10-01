@@ -1,7 +1,5 @@
-package com.bnpparibas.itg.mylibraries.libraries.exposition;
+package com.bnpparibas.itg.mylibraries.libraries;
 
-import com.bnpparibas.itg.mylibraries.libraries.application.LibraryService;
-import com.bnpparibas.itg.mylibraries.libraries.domain.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
