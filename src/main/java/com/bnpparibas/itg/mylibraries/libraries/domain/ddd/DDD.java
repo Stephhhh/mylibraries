@@ -22,7 +22,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
     "It is almost impossible to model a complex domain on the first try. Therefore, its design should be iterative. New concepts which are discovered during design and implementation should be distilled, then integrated to the Ubiquitous language. Ambiguities and missing/forgotten business rules should be fixed progressively, using intermediate releases. The tunnel effect must be avoided.\n" +
             
     "61: Existing Analysis Patterns should be studied, adapted to the domain context, and used when applicable\n" +
-    "Analysis patterns are elements of reusable OO design applied to common business domains. Some of them are natural candidates to apply in the context of a bank, such as Observations for Corporate Finance, Planning, Accountability, Trading, and Derivative Contracts.\n"
+    "Analysis patterns are eleents of reusable OO design applied to common business domains. Some of them are natural candidates to apply in the context of a bank, such as Observations for Corporate Finance, Planning, Accountability, Trading, and Derivative Contracts.\n"
 )
 public @interface DDD {
 
