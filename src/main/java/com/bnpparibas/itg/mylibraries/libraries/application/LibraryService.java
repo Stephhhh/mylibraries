@@ -1,5 +1,6 @@
 package com.bnpparibas.itg.mylibraries.libraries.application;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@DDD.ApplicationService
 @Transactional
 @Service
 public class LibraryService {

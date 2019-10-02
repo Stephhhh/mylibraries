@@ -1,5 +1,10 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
+
+import java.util.Objects;
+
+@DDD.ValueObject
 public class Address {
 
     private int number;
@@ -33,5 +38,21 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return number == address.number &&
+                postalCode == address.postalCode &&
+                street.equals(address.street) &&
+                city.equals(address.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, street, postalCode, city);
     }
 }

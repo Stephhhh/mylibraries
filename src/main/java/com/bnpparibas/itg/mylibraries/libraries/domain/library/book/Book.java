@@ -1,5 +1,8 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library.book;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
+
+@DDD.Entity
 public class Book {
 
     private Long id;
@@ -40,5 +43,27 @@ public class Book {
 
     public LiteraryGenre getLiteraryGenre() {
         return literaryGenre;
+    }
+
+    @Override public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if(!this.getClass().isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+
+        Book that = this.getClass().cast(obj);
+
+        return that.id.equals(this.id);
+    }
+
+    @Override public int hashCode() {
+        return this.id.hashCode();
+    }
+
+    @Override public String toString() {
+        return String.format("%s{id:%s)", this.getClass().getSimpleName(), id);
     }
 }

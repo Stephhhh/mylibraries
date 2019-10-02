@@ -1,9 +1,12 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 
+import java.util.Collections;
 import java.util.List;
 
+@DDD.Entity
 public class Library {
 
     private Long id;
@@ -55,6 +58,28 @@ public class Library {
     }
 
     public List<Book> getBooks() {
-        return books;
+        return Collections.unmodifiableList(books);
+    }
+
+    @Override public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if(!this.getClass().isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+
+        Library that = this.getClass().cast(obj);
+
+        return that.id.equals(this.id);
+    }
+
+    @Override public int hashCode() {
+        return this.id.hashCode();
+    }
+
+    @Override public String toString() {
+        return String.format("%s{id:%s)", this.getClass().getSimpleName(), id);
     }
 }

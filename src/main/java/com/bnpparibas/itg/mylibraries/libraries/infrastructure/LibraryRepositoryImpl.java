@@ -1,5 +1,6 @@
 package com.bnpparibas.itg.mylibraries.libraries.infrastructure;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@DDD.RepositoryImpl
 @Repository
 public class LibraryRepositoryImpl implements LibraryRepository {
 

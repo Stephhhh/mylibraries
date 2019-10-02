@@ -1,9 +1,13 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import org.springframework.util.StringUtils;
 
+import java.util.Objects;
+
+@DDD.ValueObject
 public class Director {
 
     private String surname;
@@ -29,5 +33,19 @@ public class Director {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Director director = (Director) o;
+        return surname.equals(director.surname) &&
+                name.equals(director.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name);
     }
 }
