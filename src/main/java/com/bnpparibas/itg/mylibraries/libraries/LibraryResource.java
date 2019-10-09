@@ -36,8 +36,17 @@ public class LibraryResource {
 
     @RequestMapping(method = RequestMethod.DELETE, path = {"/libraries/{libraryId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeBook(@PathVariable("libraryId") Long libraryId) {
+    public void removeLibrary(@PathVariable("libraryId") Long libraryId) {
         this.libraryService.remove(libraryId);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/type/{type}"})
+    public List<Library> listAllLibrairiesByType(@PathVariable("type") Type type) {
+        return this.libraryService.listAllByType(type);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/director/surname/{surname}"})
+    public List<Library> listAllLibrairiesByDirectorName(@PathVariable("surname") String surname) {
+        return this.libraryService.listAllByDirectorName(surname);
+    }
 }

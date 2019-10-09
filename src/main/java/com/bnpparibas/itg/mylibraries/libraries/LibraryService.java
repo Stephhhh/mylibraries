@@ -36,4 +36,12 @@ public class LibraryService {
         Library library = obtain(id);
         this.libraryDAO.delete(library);
     }
+
+    public List<Library> listAllByType(Type type) {
+        return this.libraryDAO.findByType(type);
+    }
+
+    public List<Library> listAllByDirectorName(String surname) {
+        return this.libraryDAO.searchByDirectorNameQuery(surname);
+    }
 }
