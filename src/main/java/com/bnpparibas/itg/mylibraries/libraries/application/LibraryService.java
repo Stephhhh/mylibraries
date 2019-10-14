@@ -51,7 +51,7 @@ public class LibraryService {
     }
 
     public List<Library> listAllByDirectorName(String surname) {
-        return this.libraryRepository.searchByDirectorNameQuery(surname);
+        return this.libraryRepository.findByDirectorSurname(surname);
     }
 
     public void addBook(Long libraryId, Book book) {
