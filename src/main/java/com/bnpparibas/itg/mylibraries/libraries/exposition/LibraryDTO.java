@@ -4,17 +4,23 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.LiteraryGenre;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Getter
 public class LibraryDTO {
     @JsonProperty
     Type type;
 
+    @NotNull(message = ErrorCodes.LIBRARY_MUST_HAVE_AN_ADDRESS)
     @JsonProperty
     AddressDTO addressDTO;
 
+    @Valid
     @NotNull(message = ErrorCodes.LIBRARY_MUST_HAVE_A_DIRECTOR)
     @JsonProperty
     DirectorDTO directorDTO;
@@ -29,8 +35,13 @@ public class LibraryDTO {
         this.bookDTOList = bookDTOList;
     }
 
+    @Getter
     public static class DirectorDTO {
+
+        @NotBlank(message = ErrorCodes.DIRECTOR_MUST_HAVE_A_SURNAME)
         @JsonProperty String surname;
+
+        @NotBlank(message = ErrorCodes.DIRECTOR_MUST_HAVE_A_NAME)
         @JsonProperty String name;
 
         public DirectorDTO(String surname, String name) {

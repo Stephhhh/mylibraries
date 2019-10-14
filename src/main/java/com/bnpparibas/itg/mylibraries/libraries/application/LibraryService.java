@@ -5,11 +5,14 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.LibraryRepository;
+import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
+import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @DDD.ApplicationService
@@ -39,7 +42,38 @@ public class LibraryService {
     }
 
     public void remove(Long id) {
-        Library library = obtain(id);
-        this.libraryRepository.delete(library);
+        obtain(id);
+        this.libraryRepository.delete(id);
+    }
+
+    public List<Library> listAllByType(Type type) {
+        return this.libraryRepository.findByType(type);
+    }
+
+    public List<Library> listAllByDirectorName(String surname) {
+        return this.libraryRepository.searchByDirectorNameQuery(surname);
+    }
+
+    public void addBook(Long libraryId, Book book) {
+        Library library = obtain(libraryId);
+        library.addBook(book);
+        this.libraryRepository.save(library);
+    }
+
+    public void updateBook(Long libraryId, Long bookId, Book book) {
+        Library library = obtain(libraryId);
+        library.updateBook(bookId, book);
+        this.libraryRepository.save(library);
+    }
+
+    public void removeBook(Long libraryId, Long bookId) {
+        Library library = obtain(libraryId);
+        library.removeBook(bookId);
+        this.libraryRepository.save(library);
+    }
+
+    public List<Book> listAllBooks(Long libraryId) {
+        Library library = obtain(libraryId);
+        return Collections.unmodifiableList(library.getBooks());
     }
 }

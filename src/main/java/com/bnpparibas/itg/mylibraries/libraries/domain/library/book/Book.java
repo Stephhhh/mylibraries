@@ -25,6 +25,13 @@ public class Book {
         this.literaryGenre = literaryGenre;
     }
 
+    public void update(Book bookWithNewInformation) {
+        this.title = bookWithNewInformation.getTitle();
+        this.author = bookWithNewInformation.getAuthor();
+        this.numberOfPage = bookWithNewInformation.getNumberOfPage();
+        this.literaryGenre = bookWithNewInformation.getLiteraryGenre();
+    }
+
     public Long getId() {
         return id;
     }

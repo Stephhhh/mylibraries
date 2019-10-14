@@ -9,5 +9,10 @@ public interface LibraryRepository {
     Long save(Library library);
     Library get(Long id);
     List<Library> findAll();
-    void delete(Library library);
+    void delete(Long id);
+
+    List<Library> findByType(Type type);
+    List<Library> findByDirectorSurname(String surname);
+    List<Library> searchByDirectorNameQuery(String surname);
+    List<Library> searchByDirectorNameNativeQuery(String surname);
 }

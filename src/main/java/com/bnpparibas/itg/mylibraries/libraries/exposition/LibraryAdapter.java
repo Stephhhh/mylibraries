@@ -3,10 +3,7 @@ package com.bnpparibas.itg.mylibraries.libraries.exposition;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Address;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Director;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
-import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
-import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.LiteraryGenre;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +23,26 @@ public final class LibraryAdapter {
 
         Director director = new Director(libraryDTO.directorDTO.surname, libraryDTO.directorDTO.name);
 
-        return new Library(null, libraryDTO.type, address, director, transformToBook(libraryDTO.bookDTOList));
+        return new Library(null, libraryDTO.type, address, director, transformToBookList(libraryDTO.bookDTOList));
     }
 
-    public static List<Book> transformToBook(List<LibraryDTO.BookDTO> bookDTO) {
-        return bookDTO.stream().map(b -> new Book(null, b.title, b.author, b.numberOfPage, b.literaryGenre)).collect(Collectors.toList());
+    public static List<Book> transformToBookList(List<LibraryDTO.BookDTO> bookDTO) {
+        if(bookDTO == null) {
+            return new ArrayList<>();
+        }
+
+        return bookDTO.stream().map(LibraryAdapter::transformToBook).collect(Collectors.toList());
     }
 
-    public static LibraryDTO adaptToBookDTO(Library library) {
+    public static Book transformToBook(LibraryDTO.BookDTO bookDTO) {
+        return new Book(null, bookDTO.title, bookDTO.author, bookDTO.numberOfPage, bookDTO.literaryGenre);
+    }
+
+    public static List<LibraryDTO> adaptToLibraryDTOList(List<Library> libraries) {
+        return libraries.stream().map(LibraryAdapter::adaptToLibraryDTO).collect(Collectors.toList());
+    }
+
+    public static LibraryDTO adaptToLibraryDTO(Library library) {
         return new LibraryDTO(library.getType(),
             new LibraryDTO.AddressDTO(library.getAddress().getNumber(),
                 library.getAddress().getStreet(),
@@ -46,10 +55,6 @@ public final class LibraryAdapter {
             ),
             LibraryAdapter.adaptToBookListDTO(library.getBooks())
         );
-    }
-
-    public static List<LibraryDTO> adaptToLibraryDTO(List<Library> libraries) {
-        return libraries.stream().map(LibraryAdapter::adaptToBookDTO).collect(Collectors.toList());
     }
 
     public static List<LibraryDTO.BookDTO> adaptToBookListDTO(List<Book> books) {

@@ -1,10 +1,11 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
 import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
+import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
+import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @DDD.Entity
 public class Library {
@@ -17,7 +18,7 @@ public class Library {
 
     private Director director;
 
-    private List<Book> books;
+    private List<Book> books = new ArrayList<>();
 
     public Library() {}
 
@@ -38,7 +39,32 @@ public class Library {
     }
 
     private void validate() {
-        this.director.validate();
+        Set<String> errors = new HashSet<>();
+
+        this.director.validate(errors);
+
+        if(!errors.isEmpty()) {
+            throw new MyAppBookException(errors);
+        }
+    }
+
+    public void addBook(Book book) {
+        this.getBooks().add(book);
+    }
+
+    public void updateBook(Long bookId, Book bookWithNewInformation) {
+        Book book = searchBook(bookId);
+        book.update(bookWithNewInformation);
+    }
+
+    public void removeBook(Long bookId) {
+        Book book = searchBook(bookId);
+        this.books.remove(book);
+    }
+
+    private Book searchBook(Long bookId) {
+        Book book = this.books.stream().filter(l -> l.getId().equals(bookId)).findFirst().orElseThrow(() -> new MyAppBookException(ErrorCodes.BOOK_NOT_FOUND));
+        return book;
     }
 
     public Long getId() {
@@ -58,7 +84,7 @@ public class Library {
     }
 
     public List<Book> getBooks() {
-        return Collections.unmodifiableList(books);
+        return books;
     }
 
     @Override public boolean equals(Object obj) {

@@ -40,7 +40,7 @@ public class LibraryJPA {
     @Column(name = "DIRECTOR_NAME")
     private String directorName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="LIBRARY_ID", referencedColumnName = "ID")
     private List<BookJPA> books;
 
