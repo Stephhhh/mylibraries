@@ -36,7 +36,7 @@ public class LibraryResource {
     public void updateLibrary(@PathVariable("libraryId") Long libraryId, @RequestBody LibraryDTO libraryDTO) {
         this.libraryService.update(libraryId, LibraryAdapter.transformToLibrary(libraryDTO));
     }
-    
+
     @RequestMapping(method = RequestMethod.DELETE, path = {"/libraries/{libraryId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeLibrary(@PathVariable("libraryId") Long libraryId) {
