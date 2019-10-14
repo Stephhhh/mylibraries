@@ -33,11 +33,10 @@ public class LibraryResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = {"/libraries/{libraryId}"})
-    @ResponseStatus(HttpStatus.OK)
     public void updateLibrary(@PathVariable("libraryId") Long libraryId, @RequestBody LibraryDTO libraryDTO) {
         this.libraryService.update(libraryId, LibraryAdapter.transformToLibrary(libraryDTO));
     }
-
+    
     @RequestMapping(method = RequestMethod.DELETE, path = {"/libraries/{libraryId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeLibrary(@PathVariable("libraryId") Long libraryId) {
@@ -61,7 +60,6 @@ public class LibraryResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = {"/libraries/{libraryId}/books/{bookId}"})
-    @ResponseStatus(HttpStatus.OK)
     public void updateBook(@PathVariable("libraryId") Long libraryId, @PathVariable("bookId") Long bookId, @RequestBody LibraryDTO.BookDTO bookDTO) {
         this.libraryService.updateBook(libraryId, bookId, LibraryAdapter.transformToBook(bookDTO));
     }
