@@ -20,8 +20,8 @@ public class LibrariesApplicationTests {
 
 		Director director = new Director("surname", "name");
 
-		Library l1 = new Library(1L, Type.ASSOCIATIVE, address, director, null);
-		Library l2 = new Library(1L, Type.NATIONAL, address, director, null);
+		Library l1 = new Library(1L, "B1", Type.ASSOCIATIVE, address, director, null);
+		Library l2 = new Library(1L, "B2",Type.NATIONAL, address, director, null);
 
 		Assert.assertEquals(l1, l2);
 	}

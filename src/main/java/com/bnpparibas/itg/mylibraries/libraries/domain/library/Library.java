@@ -12,6 +12,8 @@ public class Library {
 
     private Long id;
 
+    private String label;
+
     private Type type;
 
     private Address address;
@@ -22,8 +24,9 @@ public class Library {
 
     public Library() {}
 
-    public Library(Long id, Type type, Address address, Director director, List<Book> books) {
+    public Library(Long id, String label, Type type, Address address, Director director, List<Book> books) {
         this.id = id;
+        this.label = label;
         this.type = type;
         this.address = address;
         this.director = director;
@@ -32,6 +35,7 @@ public class Library {
     }
 
     public void update(Library libraryWithNewInformation) {
+        this.label = libraryWithNewInformation.getLabel();
         this.type = libraryWithNewInformation.getType();
         this.address = libraryWithNewInformation.getAddress();
         this.director = libraryWithNewInformation.getDirector();
@@ -69,6 +73,10 @@ public class Library {
 
     public Long getId() {
         return id;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public Type getType() {

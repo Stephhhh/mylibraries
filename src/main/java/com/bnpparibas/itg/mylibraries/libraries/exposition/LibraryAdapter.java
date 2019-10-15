@@ -23,7 +23,7 @@ public final class LibraryAdapter {
 
         Director director = new Director(libraryDTO.directorDTO.surname, libraryDTO.directorDTO.name);
 
-        return new Library(null, libraryDTO.type, address, director, transformToBookList(libraryDTO.bookDTOList));
+        return new Library(null, libraryDTO.label, libraryDTO.type, address, director, transformToBookList(libraryDTO.bookDTOList));
     }
 
     public static List<Book> transformToBookList(List<LibraryDTO.BookDTO> bookDTO) {
@@ -43,7 +43,8 @@ public final class LibraryAdapter {
     }
 
     public static LibraryDTO adaptToLibraryDTO(Library library) {
-        return new LibraryDTO(library.getType(),
+        return new LibraryDTO(library.getLabel(),
+                library.getType(),
             new LibraryDTO.AddressDTO(library.getAddress().getNumber(),
                 library.getAddress().getStreet(),
                 library.getAddress().getPostalCode(),

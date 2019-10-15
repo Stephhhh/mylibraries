@@ -18,6 +18,9 @@ public class LibraryJPA {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "LABEL")
+    private String label;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
     private Type type;
@@ -48,6 +51,7 @@ public class LibraryJPA {
 
     public LibraryJPA(Library library) {
         this.id = library.getId();
+        this.label = library.getLabel();
         this.type = library.getType();
         this.addressNumber = library.getAddress().getNumber();
         this.addressStreet = library.getAddress().getStreet();
@@ -65,11 +69,15 @@ public class LibraryJPA {
 
         List<Book> bookList = books.stream().map(b -> new Book(b.getId(), b.getTitle(), b.getAuthor(), b.getNumberOfPage(), b.getLiteraryGenre())).collect(Collectors.toList());
 
-        return new Library(id, this.type, address, director, bookList);
+        return new Library(id, this.label, this.type, address, director, bookList);
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public Type getType() {

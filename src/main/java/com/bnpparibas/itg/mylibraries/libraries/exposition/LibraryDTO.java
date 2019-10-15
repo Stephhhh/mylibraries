@@ -14,6 +14,9 @@ import java.util.List;
 @Getter
 public class LibraryDTO {
     @JsonProperty
+    String label;
+
+    @JsonProperty
     Type type;
 
     @NotNull(message = ErrorCodes.LIBRARY_MUST_HAVE_AN_ADDRESS)
@@ -28,7 +31,8 @@ public class LibraryDTO {
     @JsonProperty
     List<BookDTO> bookDTOList;
 
-    public LibraryDTO(Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
+    public LibraryDTO(String label, Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
+        this.label = label;
         this.type = type;
         this.addressDTO = addressDTO;
         this.directorDTO = directorDTO;
