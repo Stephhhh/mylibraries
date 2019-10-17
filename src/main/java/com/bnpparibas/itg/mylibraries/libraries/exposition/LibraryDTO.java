@@ -13,6 +13,9 @@ import java.util.List;
 
 @Getter
 public class LibraryDTO {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Long id;
+
     @JsonProperty
     String label;
 
@@ -31,7 +34,8 @@ public class LibraryDTO {
     @JsonProperty
     List<BookDTO> bookDTOList;
 
-    public LibraryDTO(String label, Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
+    public LibraryDTO(Long id, String label, Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
+        this.id = id;
         this.label = label;
         this.type = type;
         this.addressDTO = addressDTO;
@@ -81,4 +85,5 @@ public class LibraryDTO {
             this.literaryGenre = literaryGenre;
         }
     }
+
 }

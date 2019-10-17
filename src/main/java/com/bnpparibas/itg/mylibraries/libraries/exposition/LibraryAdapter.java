@@ -43,7 +43,8 @@ public final class LibraryAdapter {
     }
 
     public static LibraryDTO adaptToLibraryDTO(Library library) {
-        return new LibraryDTO(library.getLabel(),
+        return new LibraryDTO(library.getId(),
+                library.getLabel(),
                 library.getType(),
             new LibraryDTO.AddressDTO(library.getAddress().getNumber(),
                 library.getAddress().getStreet(),
