@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-librairies
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: my-librairies
+    spec:
+      containers:
+        - name: my-librairies
+          image: mylibrairies
+          ports:
+            - containerPort: 80
