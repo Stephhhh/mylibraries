@@ -2,7 +2,7 @@ FROM ibmjava:8-sfj
 VOLUME /tmp
 EXPOSE 8080
 
-RUN find / -name mylibrairies*
+RUN echo $(find / -name mylibrairies*)
 
 COPY target/mylibrairies.jar /app.jar
 
