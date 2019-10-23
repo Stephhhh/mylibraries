@@ -2,8 +2,6 @@ FROM ibmjava:8-sfj
 VOLUME /tmp
 EXPOSE 8080
 
-RUN mvn clean install
-
 RUN find / -name mylibrairies*
 
 COPY target/mylibrairies.jar /app.jar
