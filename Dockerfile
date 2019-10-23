@@ -1,9 +1,9 @@
+FROM maven:3.5-jdk-8-alpine
+WORKDIR /app
+RUN mvn install
+
 FROM ibmjava:8-sfj
-VOLUME /tmp
-EXPOSE 8080
-
-RUN echo $(find / -name *ibra*)
-
+WORKDIR /app
 COPY target/mylibrairies.jar /app.jar
 
 ENV JAVA_OPTS=""
