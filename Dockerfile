@@ -1,6 +1,6 @@
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-RUN mvn install
+RUN echo $(mvn install)
 
 FROM ibmjava:8-sfj
 WORKDIR /app
