@@ -3,9 +3,9 @@ RUN echo $(ls -al)
 WORKDIR /app
 RUN git clone https://github.com/Stephhhh/mylibraries.git
 WORKDIR /app
-RUN git checkout cloud
+RUN cd mylibraries
 WORKDIR /app
-RUN echo $(ls -al)
+RUN git checkout cloud
 
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
