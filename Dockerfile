@@ -4,7 +4,6 @@ WORKDIR /app
 RUN git clone https://github.com/Stephhhh/mylibraries.git
 WORKDIR /app
 RUN cd mylibraries
-WORKDIR /app
 RUN git checkout cloud
 
 FROM maven:3.5-jdk-8-alpine
