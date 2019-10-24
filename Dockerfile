@@ -1,9 +1,7 @@
 FROM maven:3.5-jdk-8-alpine
-WORKDIR /app
 RUN echo $(mvn install)
 
 FROM ibmjava:8-sfj
-WORKDIR /app
 COPY target/mylibrairies.jar /app.jar
 
 ENV JAVA_OPTS=""
