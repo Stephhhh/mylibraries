@@ -5,7 +5,7 @@ RUN git clone https://github.com/Stephhhh/mylibraries.git && cd mylibraries && g
 FROM maven:3.5-jdk-8-alpine as build
 WORKDIR /app
 COPY --from=clone /app/mylibraries /app
-RUN echo $(mvn clean install) && RUN echo $(ls -al)
+RUN echo $(mvn clean install) && echo $(ls -al)
 
 FROM ibmjava:8-sfj
 WORKDIR /app
