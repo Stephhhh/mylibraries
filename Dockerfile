@@ -1,14 +1,10 @@
 FROM alpine/git
 WORKDIR /app
-RUN git clone https://github.com/Stephhhh/mylibraries.git
-RUN cd mylibraries
-RUN git checkout cloud
+RUN git clone https://github.com/Stephhhh/mylibraries.git && cd mylibraries && git checkout cloud
 
 FROM maven:3.5-jdk-8-alpine
 WORKDIR /app
-RUN cd mylibraries
-RUN echo $(mvn clean install)
-RUN echo $(ls -al)
+RUN cd mylibraries && RUN echo $(mvn clean install) && RUN echo $(ls -al)
 
 FROM ibmjava:8-sfj
 WORKDIR /app
