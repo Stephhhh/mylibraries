@@ -26,10 +26,12 @@ metadata:
   labels:
     app: my-librairies
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 8088
-      targetPort: 8088
+    - name : http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort : 30236
   selector:
     app: my-librairies
