@@ -4,6 +4,9 @@ metadata:
   name: my-librairies
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: my-librairies
   template:
     metadata:
       labels:
@@ -13,7 +16,8 @@ spec:
         - name: my-librairies
           image: mylibrairies
           ports:
-            - containerPort: 80
+            - containerPort: 8088
+              protocol: TCP
 ---
 apiVersion: v1
 kind: Service
@@ -22,8 +26,10 @@ metadata:
   labels:
     app: my-librairies
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 8088
+      targetPort: 8088
   selector:
     app: my-librairies
