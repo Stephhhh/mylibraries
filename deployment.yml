@@ -16,7 +16,7 @@ spec:
         - name: my-librairies
           image: mylibrairies
           ports:
-            - containerPort: 8088
+            - containerPort: 9099
               protocol: TCP
 ---
 apiVersion: v1
@@ -28,10 +28,6 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name : http
-      protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort : 30236
+    - port: 9099
   selector:
     app: my-librairies
