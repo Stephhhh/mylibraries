@@ -45,5 +45,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: mylibrairies
+              serviceName: my-librairies
               servicePort: 9099
