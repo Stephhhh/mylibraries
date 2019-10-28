@@ -31,3 +31,19 @@ spec:
     - port: 9099
   selector:
     app: my-librairies
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+  name: mylibrairies
+  namespace: dev
+spec:
+  rules:
+    - host: mylibrairies.sitcluster.eu-de.containers.appdomain.cloud
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mylibrairies
+              servicePort: 9099
