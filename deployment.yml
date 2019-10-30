@@ -52,7 +52,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-librairies
-  namespace: dev
 data:
     spring.datasource.driver-class-name=org.postgresql.Driver
     spring.datasource.url=jdbc:postgresql://b8a37426-5db1-4789-8cc7-f81692070b29.blrv234f085n1l00bhrg.databases.appdomain.cloud:32722/ibmclouddb?ssl=true&sslmode=require&sslfactory=org.postgresql.ssl.NonValidatingFactory
