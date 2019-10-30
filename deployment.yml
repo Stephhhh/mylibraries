@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-librairies
-  namespace: dev
 spec:
   replicas: 2
   selector:
@@ -26,7 +25,6 @@ metadata:
   name: my-librairies
   labels:
     app: my-librairies
-  namespace: dev
 spec:
   type: NodePort
   ports:
