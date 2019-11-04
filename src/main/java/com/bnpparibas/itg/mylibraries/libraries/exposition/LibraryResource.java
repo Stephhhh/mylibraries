@@ -4,6 +4,7 @@ import com.bnpparibas.itg.mylibraries.libraries.application.LibraryService;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,17 @@ import java.util.List;
 @RestController
 public class LibraryResource {
 
+    @Value("${mylibrairies.ref.val}")
+    private String ref;
+
     @Autowired
     private LibraryService libraryService;
+
+    @RequestMapping(method = RequestMethod.GET, path = {"/hi"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public String createLibrary() {
+        return ref;
+    }
 
     @RequestMapping(method = RequestMethod.POST, path = {"/libraries"})
     @ResponseStatus(HttpStatus.CREATED)
