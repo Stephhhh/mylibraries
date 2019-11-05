@@ -53,4 +53,5 @@ kind: ConfigMap
 metadata:
   name: my-librairies-cfg
 data:
-  mylibrairies.ref.val: Hooooo
+  application.properties: |-
+    mylibrairies.ref.val: Hooooo
