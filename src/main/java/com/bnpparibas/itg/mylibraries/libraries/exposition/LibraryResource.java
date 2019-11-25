@@ -18,8 +18,8 @@ public class LibraryResource {
 
     @RequestMapping(method = RequestMethod.POST, path = {"/libraries"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createLibrary(@Valid @RequestBody LibraryDTO libraryDTO) {
-        return this.libraryService.create(LibraryAdapter.transformToLibrary(libraryDTO));
+    public void createLibrary(@Valid @RequestBody LibraryDTO libraryDTO) {
+         this.libraryService.create(LibraryAdapter.transformToLibrary(libraryDTO));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = {"/libraries/{libraryId}"})

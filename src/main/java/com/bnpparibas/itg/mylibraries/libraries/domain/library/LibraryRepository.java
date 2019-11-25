@@ -6,7 +6,7 @@ import java.util.List;
 
 @DDD.Repository
 public interface LibraryRepository {
-    Long save(Library library);
+    String save(Library library);
     Library get(Long id);
     List<Library> findAll();
     void delete(Long id);

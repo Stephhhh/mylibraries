@@ -5,10 +5,12 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 import java.util.Set;
 
 @DDD.ValueObject
+@Embeddable
 public class Director {
 
     private String surname;

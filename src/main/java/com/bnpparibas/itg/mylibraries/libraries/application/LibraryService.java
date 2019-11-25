@@ -23,7 +23,7 @@ public class LibraryService {
     @Autowired
     private LibraryRepository libraryRepository;
 
-    public Long create(Library newLibrary) {
+    public String create(Library newLibrary) {
         return this.libraryRepository.save(newLibrary);
     }
 

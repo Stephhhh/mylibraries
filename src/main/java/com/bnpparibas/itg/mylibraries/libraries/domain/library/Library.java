@@ -5,12 +5,13 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 
+import javax.persistence.Embedded;
 import java.util.*;
 
 @DDD.Entity
 public class Library {
 
-    private Long id;
+    private String id;
 
     private String label;
 
@@ -24,7 +25,7 @@ public class Library {
 
     public Library() {}
 
-    public Library(Long id, String label, Type type, Address address, Director director, List<Book> books) {
+    public Library(String id, String label, Type type, Address address, Director director, List<Book> books) {
         this.id = id;
         this.label = label;
         this.type = type;
@@ -71,7 +72,7 @@ public class Library {
         return book;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

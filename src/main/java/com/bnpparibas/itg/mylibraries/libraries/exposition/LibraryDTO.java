@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 public class LibraryDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    Long id;
+    String id;
 
     @JsonProperty
     String label;
@@ -34,7 +34,11 @@ public class LibraryDTO {
     @JsonProperty
     List<BookDTO> bookDTOList;
 
-    public LibraryDTO(Long id, String label, Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
+    public LibraryDTO() {
+
+    }
+
+    public LibraryDTO(String id, String label, Type type, AddressDTO addressDTO, DirectorDTO directorDTO, List<BookDTO> bookDTOList) {
         this.id = id;
         this.label = label;
         this.type = type;
@@ -47,10 +51,10 @@ public class LibraryDTO {
     public static class DirectorDTO {
 
         @NotBlank(message = ErrorCodes.DIRECTOR_MUST_HAVE_A_SURNAME)
-        @JsonProperty String surname;
+        @JsonProperty("firstname") String surname;
 
         @NotBlank(message = ErrorCodes.DIRECTOR_MUST_HAVE_A_NAME)
-        @JsonProperty String name;
+        @JsonProperty("lastname") String name;
 
         public DirectorDTO(String surname, String name) {
             this.surname = surname;
@@ -59,7 +63,7 @@ public class LibraryDTO {
     }
 
     public static class AddressDTO {
-        @JsonProperty int number;
+        @JsonProperty("numberStreet") int number;
         @JsonProperty String street;
         @JsonProperty int postalCode;
         @JsonProperty String city;

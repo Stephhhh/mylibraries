@@ -25,7 +25,7 @@ public class LibraryRepositoryImpl implements LibraryRepository {
     }
 
     @Override
-    public Long save(Library library) {
+    public String save(Library library) {
         LibraryJPA libraryJPA = libraryDAO.save(new LibraryJPA(library));
         return libraryJPA.getId();
     }

@@ -7,6 +7,7 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public final class LibraryAdapter {
@@ -23,7 +24,9 @@ public final class LibraryAdapter {
 
         Director director = new Director(libraryDTO.directorDTO.surname, libraryDTO.directorDTO.name);
 
-        return new Library(null, libraryDTO.label, libraryDTO.type, address, director, transformToBookList(libraryDTO.bookDTOList));
+        String id = (libraryDTO.id == null || libraryDTO.id.trim().equals(""))? UUID.randomUUID().toString() : libraryDTO.id;
+
+        return new Library(id, libraryDTO.label, libraryDTO.type, address, director, transformToBookList(libraryDTO.bookDTOList));
     }
 
     public static List<Book> transformToBookList(List<LibraryDTO.BookDTO> bookDTO) {

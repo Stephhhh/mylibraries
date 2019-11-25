@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 public class LibraryJPA {
 
     @Id
-    @GeneratedValue
+    //@GeneratedValue()
     @Column(name = "ID")
-    private Long id;
+    private String id;
 
     @Column(name = "LABEL")
     private String label;
@@ -72,7 +72,7 @@ public class LibraryJPA {
         return new Library(id, this.label, this.type, address, director, bookList);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
