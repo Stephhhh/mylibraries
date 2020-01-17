@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <springProperty scope="context" name="log.pattern" source="server.log.pattern" defaultValue="%d{dd/MM/yyyy HH:mm:ss} [%thread] %-5level %logger %class{36} - %msg%n"/>
+
+    <springProfile name="LOCAL_LOG">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="ARA_LOG">
+        <springProperty scope="context" name="log.directory" source="server.log.directory" defaultValue="../logs"/>
+        <springProperty scope="context" name="log.max.file.size" source="server.log.max.file.size" defaultValue="50MB"/>
+        <springProperty scope="context" name="log.max.total.archive.file.size" source="server.log.max.total.archive.file.size" defaultValue="1GB"/>
+        <springProperty scope="context" name="log.file.nb.days.to.keep" source="server.log.file.nb.days.to.keep" defaultValue="30"/>
+    </springProfile>
+
+    <springProfile name="CLOUD_LOG">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <filter class="com.bnpparibas.itg.mylibraries.libraries.logger.filter.CloudFilterStdout" />
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+            <target>System.err</target>
+            <filter class="com.bnpparibas.itg.mylibraries.libraries.logger.filter.CloudFilterStderr" />
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="ARA_LOG">
+        <springProperty scope="context" name="log.appname" source="server.log.refi.appname" defaultValue="appname" />
+
+        <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.directory}/${log.appname}-audit.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${log.directory}/auditBasedlogFile-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+                <maxHistory>${log.file.nb.days.to.keep}</maxHistory>
+                <totalSizeCap>${log.max.total.archive.file.size}</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.directory}/${log.appname}-error.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${log.directory}/errorBasedlogFile-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+                <maxHistory>${log.file.nb.days.to.keep}</maxHistory>
+                <totalSizeCap>${log.max.total.archive.file.size}</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE-QR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.directory}/${log.appname}-qr.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${log.directory}/qrBasedlogFile-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+                <maxHistory>${log.file.nb.days.to.keep}</maxHistory>
+                <totalSizeCap>${log.max.total.archive.file.size}</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.directory}/${log.appname}-debug.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${log.directory}/debugBasedlogFile-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+                <maxHistory>${log.file.nb.days.to.keep}</maxHistory>
+                <totalSizeCap>${log.max.total.archive.file.size}</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE-INSTALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${log.directory}/${log.appname}-install.log</file>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${log.directory}/installBasedlogFile-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+                <maxFileSize>${log.max.file.size}</maxFileSize>
+                <maxHistory>${log.file.nb.days.to.keep}</maxHistory>
+                <totalSizeCap>${log.max.total.archive.file.size}</totalSizeCap>
+            </rollingPolicy>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <charset>UTF-8</charset>
+                <pattern>${log.pattern}</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="audit" level="INFO">
+            <appender-ref ref="FILE-AUDIT" />
+        </logger>
+
+        <logger name="error" level="WARN">
+            <appender-ref ref="FILE-ERROR" />
+        </logger>
+
+        <logger name="qr" level="INFO">
+            <appender-ref ref="FILE-QR" />
+        </logger>
+
+        <logger name="debug" level="DEBUG">
+            <appender-ref ref="FILE-DEBUG" />
+        </logger>
+
+        <logger name="install" level="TRACE">
+            <appender-ref ref="FILE-INSTALL" />
+        </logger>
+
+        <logger name="org.springframework" level="TRACE">
+            <appender-ref ref="FILE-INSTALL" />
+        </logger>
+    </springProfile>
+
+    <root>
+        <springProfile name="LOCAL_LOG">
+            <appender-ref ref="STDOUT" />
+        </springProfile>
+
+        <springProfile name="ARA_LOG">
+            <appender-ref ref="FILE-DEBUG" />
+        </springProfile>
+
+        <springProfile name="CLOUD_LOG">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="STDERR" />
+        </springProfile>
+    </root>
+
+</configuration>

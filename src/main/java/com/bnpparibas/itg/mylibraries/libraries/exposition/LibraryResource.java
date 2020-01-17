@@ -3,6 +3,8 @@ package com.bnpparibas.itg.mylibraries.libraries.exposition;
 import com.bnpparibas.itg.mylibraries.libraries.application.LibraryService;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,10 @@ import java.util.List;
 @RestController
 public class LibraryResource {
 
+    Logger audit = LoggerFactory.getLogger("audit");
+    Logger error = LoggerFactory.getLogger("error");
+    Logger debug = LoggerFactory.getLogger("debug");
+
     @Value("${mylibrairies.ref.val}")
     private String ref;
 
@@ -23,6 +29,12 @@ public class LibraryResource {
     @RequestMapping(method = RequestMethod.GET, path = {"/hi"})
     @ResponseStatus(HttpStatus.CREATED)
     public String createLibrary() {
+        error.info("WAARBBB");
+        debug.debug("DEBUGGGG");
+        debug.warn("warnnnnnnnnnnnnnnnnnnnnnnn");
+        error.error("ERRRRRRRRRRRR");
+        error.debug("AAAA");
+        error.error("AAAARRR");
         return ref;
     }
 
