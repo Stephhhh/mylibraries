@@ -45,6 +45,10 @@
     </springProfile>
 
     <springProfile name="ARA_LOG">
+        <springProperty scope="context" name="log.directory" source="server.log.directory" defaultValue="../logs"/>
+        <springProperty scope="context" name="log.max.file.size" source="server.log.max.file.size" defaultValue="50MB"/>
+        <springProperty scope="context" name="log.max.total.archive.file.size" source="server.log.max.total.archive.file.size" defaultValue="1GB"/>
+        <springProperty scope="context" name="log.file.nb.days.to.keep" source="server.log.file.nb.days.to.keep" defaultValue="30"/>
         <springProperty scope="context" name="log.appname" source="server.log.refi.appname" defaultValue="appname" />
 
         <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
