@@ -1,5 +1,6 @@
 package com.bnpparibas.itg.mylibraries.libraries.application;
 
+import com.bnpparibas.itg.mylibraries.libraries.domain.Type;
 import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryDAO;
 import com.bnpparibas.itg.mylibraries.libraries.domain.Library;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,13 @@ public class LibraryService {
     public void remove(Long id) {
         Library library = obtain(id);
         this.libraryDAO.delete(library);
+    }
+
+    public List<Library> listAllByType(Type type) {
+        return this.libraryDAO.findLibraryByType(type);
+    }
+
+    public List<Library> listAllByDirectorName(String surname) {
+        return this.libraryDAO.findLibraryByDirectorSurname(surname);
     }
 }
