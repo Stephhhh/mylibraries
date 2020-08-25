@@ -2,6 +2,7 @@ package com.bnpparibas.itg.mylibraries.libraries.exposition;
 
 import com.bnpparibas.itg.mylibraries.libraries.application.LibraryService;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
+import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,32 +15,45 @@ public class LibraryResource {
     @Autowired
     private LibraryService libraryService;
 
-    @RequestMapping(method = RequestMethod.POST, path = {"/libraries/"})
+    @PostMapping("/libraries")
     @ResponseStatus(HttpStatus.CREATED)
     public Long createLibrary(@RequestBody Library library) {
         return this.libraryService.create(library);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/{libraryId}"})
+    @GetMapping("/libraries/{libraryId}")
+    @ResponseStatus(HttpStatus.OK)
     public Library detailLibrary(@PathVariable("libraryId") Long libraryId) {
         return this.libraryService.obtain(libraryId);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = {"/libraries/"})
+    @GetMapping("/libraries")
+    @ResponseStatus(HttpStatus.OK)
     public List<Library> listAllLibrairies() {
         return this.libraryService.listAll();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = {"/libraries/{libraryId}"})
+    @PutMapping("/libraries/{libraryId}")
     @ResponseStatus(HttpStatus.OK)
     public void updateLibrary(@PathVariable("libraryId") Long libraryId, @RequestBody Library library) {
         this.libraryService.update(libraryId, library);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = {"/libraries/{libraryId}"})
+    @DeleteMapping("/libraries/{libraryId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void removeBook(@PathVariable("libraryId") Long libraryId) {
+    public void removeLibrary(@PathVariable("libraryId") Long libraryId) {
         this.libraryService.remove(libraryId);
     }
 
+    @GetMapping("/libraries/type/{type}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Library> listAllLibrairiesByType(@PathVariable("type") Type type) {
+        return this.libraryService.listAllByType(type);
+    }
+
+    @GetMapping("/libraries/director/surname/{surname}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Library> listAllLibrairiesByDirectorName(@PathVariable("surname") String surname) {
+        return this.libraryService.listAllByDirectorName(surname);
+    }
 }

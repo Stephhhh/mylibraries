@@ -3,6 +3,7 @@ package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.book.Book;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "LIBRARY")
@@ -23,7 +24,7 @@ public class Library {
     @Embedded
     private Director director;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name="LIBRARY_ID", referencedColumnName = "ID")
     private List<Book> books;
 
