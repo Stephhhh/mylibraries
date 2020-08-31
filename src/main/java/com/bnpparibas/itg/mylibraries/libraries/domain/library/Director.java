@@ -1,7 +1,7 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
 import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ErrorCodes;
-import com.bnpparibas.itg.mylibraries.libraries.domain.exception.MyAppBookException;
+import com.bnpparibas.itg.mylibraries.libraries.domain.exception.ValidationException;
 import org.springframework.util.StringUtils;
 
 public class Director {
@@ -19,7 +19,7 @@ public class Director {
 
     public void validate() {
         if (this == null || StringUtils.isEmpty(this.surname) || StringUtils.isEmpty(this.name ==null)) {
-            throw new MyAppBookException(ErrorCodes.LIBRARY_MUST_HAVE_A_DIRECTOR);
+            throw new ValidationException(ErrorCodes.LIBRARY_MUST_HAVE_A_DIRECTOR);
         }
     }
 
