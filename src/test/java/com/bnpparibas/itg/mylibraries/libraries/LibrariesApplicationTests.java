@@ -74,9 +74,11 @@ class LibrariesApplicationTests {
 				Arrays.stream(response.getBody())
 						.flatMap(library -> library.getBooks().stream())
 				)
+				.haveExactly(2, new Condition<>(book -> book.getTitle().equals(LORDOFTHERINGS.getTitle()), ""))
+				// Attention here, even if two books are the same in the database, they end-up being two different java objects
+				// This will pass even though we have two "Lords of the Ring" which correspond to the same entry
+				// Be veeeeery careful when dealing with many-to-many relationships
 				.doesNotHaveDuplicates();
-				//Attention here ! If you try to add the same object multiple times in a one-to-many, it will MOVE the object (and not duplicate it)
-				//.haveAtMost(1, new Condition<>(book -> book.getTitle().equals(LORDOFTHERINGS.getTitle()), ""));
 	}
 
 	@Test

@@ -24,8 +24,7 @@ public class Library {
     @Embedded
     private Director director;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name="LIBRARY_ID", referencedColumnName = "ID")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private List<Book> books;
 
     public Library() {}
