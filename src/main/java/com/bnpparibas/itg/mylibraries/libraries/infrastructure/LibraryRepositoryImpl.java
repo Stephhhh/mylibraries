@@ -42,11 +42,17 @@ public class LibraryRepositoryImpl implements LibraryRepository {
 
     @Override
     public List<Library> findLibraryByType(Type type) {
-        return libraryDAO.findLibraryByType(type);
+        return libraryDAO.findLibraryByType(type)
+                .stream()
+                .map(LibraryJPA::toLibrary)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Library> findLibraryByDirectorSurname(String surname) {
-        return libraryDAO.findLibraryByDirectorSurname(surname);
+        return libraryDAO.findLibraryByDirectorSurname(surname)
+                .stream()
+                .map(LibraryJPA::toLibrary)
+                .collect(Collectors.toList());
     }
 }
