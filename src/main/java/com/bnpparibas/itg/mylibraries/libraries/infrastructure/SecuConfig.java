@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 @Profile("!dev")
 @Configuration
@@ -34,6 +36,14 @@ public class SecuConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                     .password(passwordEncoder().encode("123"))
                     .authorities("ROLE_USER", "ROLE_ADMIN");
+
+//        auth.jdbcAuthentication()
+//                .usersByUsernameQuery("select username,password,enabled"
+//                + "from users "
+//                + "where username = ?")
+//                .authoritiesByUsernameQuery("select username,authority "
+//                        + "from authorities "
+//                        + "where email = ?");
     }
 
     @Override
@@ -43,6 +53,7 @@ public class SecuConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 // '/**' signifie 'la racine et toute l'arborescence qui suit'
                 .antMatchers("/unsecured/**").permitAll()
+                .antMatchers("/login").permitAll()
                 // Ici la même url peut avoir des accès différents selon les verbes HTTP utilisés
                 .antMatchers(HttpMethod.GET, "/url").permitAll()
                 .antMatchers(HttpMethod.POST, "/url").authenticated()
@@ -56,13 +67,28 @@ public class SecuConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
             .and()
 
-//            .formLogin()
-            .httpBasic()
+//            .httpBasic()
+                .formLogin()
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
+                    httpServletResponse.getWriter().println("Autentification effectuée !");
+                })
             .and()
 
-            .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
+                    httpServletResponse.getWriter().println("Logout effectuée !");
+                })
+            .and()
 
+            .exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+            .and()
+
+            .csrf().disable()
         ;
     }
 
