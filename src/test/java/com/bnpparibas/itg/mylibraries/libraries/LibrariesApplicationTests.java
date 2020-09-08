@@ -12,6 +12,7 @@ import com.bnpparibas.itg.mylibraries.libraries.infrastructure.LibraryJPA;
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -28,10 +30,12 @@ import java.util.stream.Collectors;
 import static com.bnpparibas.itg.mylibraries.libraries.DatabaseTestHelper.NATIONAL_LIBRARY_MONTREUIL;
 import static com.bnpparibas.itg.mylibraries.libraries.DatabaseTestHelper.SCHOOL_LIBRARY_PARIS;
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("tp-spring-0")
+@AutoConfigureMockMvc
 class LibrariesApplicationTests {
 
 	@Autowired
@@ -42,15 +46,23 @@ class LibrariesApplicationTests {
 
 	@Autowired
 	private DatabaseTestHelper databaseTestHelper;
-//
-//	@Autowired
-//	private MockMvc mvc;
-//
-//	@Test
-//	@WithMockUser(roles = "ROLE_ADMIN")
-//	public void test49(){
-//		mvc.perform()
-//	}
+
+
+	@Autowired
+	private MockMvc mvc;
+
+	@Test
+	@WithMockUser(roles = "USER")
+	public void test49() throws Exception {
+		mvc.perform(get("/admin")).andExpect(status().is4xxClientError());
+		mvc.perform(get("/user")).andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(roles = "ADMIN")
+	public void test41() throws Exception {
+		mvc.perform(get("/admin")).andExpect(status().isOk());
+	}
 
 
 	//As long as we have some other integration tests, this is useless
@@ -69,8 +81,11 @@ class LibrariesApplicationTests {
 		databaseTestHelper.tearDown();
 	}
 
+
+
 	@Test
 	@DisplayName("Api GET:/libraries should return all 5 libraries")
+	@WithMockUser
 	void test_read_all(){
 		//--------------- Given ---------------
 		//Test data
@@ -90,10 +105,10 @@ class LibrariesApplicationTests {
 		assertThat(
 				Arrays.stream(response.getBody())
 						.flatMap(library -> library.getBooks().stream())
-				)
+		)
 				.doesNotHaveDuplicates();
-				//Attention here ! If you try to add the same object multiple times in a one-to-many, it will MOVE the object (and not duplicate it)
-				//.haveAtMost(1, new Condition<>(book -> book.getTitle().equals(LORDOFTHERINGS.getTitle()), ""));
+		//Attention here ! If you try to add the same object multiple times in a one-to-many, it will MOVE the object (and not duplicate it)
+		//.haveAtMost(1, new Condition<>(book -> book.getTitle().equals(LORDOFTHERINGS.getTitle()), ""));
 	}
 
 	@Test
@@ -297,3 +312,4 @@ class LibrariesApplicationTests {
 				.allMatch(library -> library.getDirector().getSurname().equals("Garfield"));
 	}
 }
+

@@ -33,7 +33,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(("")))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.none())
                 .build()
                 .apiInfo(apiInfo())
                 .securitySchemes(Arrays.asList(securityScheme()))
