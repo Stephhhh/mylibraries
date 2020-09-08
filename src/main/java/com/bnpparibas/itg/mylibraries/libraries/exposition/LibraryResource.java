@@ -5,12 +5,15 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import java.util.List;
 
 @RestController
+@Validated
 public class LibraryResource {
 
     @Autowired
@@ -24,7 +27,7 @@ public class LibraryResource {
 
     @GetMapping("/libraries/{libraryId}")
     @ResponseStatus(HttpStatus.OK)
-    public Library detailLibrary(@PathVariable("libraryId") Long libraryId) {
+    public Library detailLibrary(@Max(6) @Valid @PathVariable("libraryId") Long libraryId) {
         return libraryService.obtain(libraryId);
     }
 

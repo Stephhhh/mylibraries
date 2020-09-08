@@ -18,6 +18,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -40,6 +42,16 @@ class LibrariesApplicationTests {
 
 	@Autowired
 	private DatabaseTestHelper databaseTestHelper;
+//
+//	@Autowired
+//	private MockMvc mvc;
+//
+//	@Test
+//	@WithMockUser(roles = "ROLE_ADMIN")
+//	public void test49(){
+//		mvc.perform()
+//	}
+
 
 	//As long as we have some other integration tests, this is useless
 	//	@Test

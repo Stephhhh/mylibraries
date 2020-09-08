@@ -16,6 +16,7 @@ public class LibraryDTO {
     final Type type;
 
     @JsonProperty
+    @NotNull
     final AddressDTO addressDTO;
 
     @NotNull(message = ErrorCodes.LIBRARY_MUST_HAVE_A_DIRECTOR)
@@ -33,7 +34,9 @@ public class LibraryDTO {
     }
 
     public static class DirectorDTO {
-        @JsonProperty final String surname;
+        @JsonProperty
+        final String surname;
+
         @JsonProperty final String name;
 
         public DirectorDTO(String surname, String name) {

@@ -5,6 +5,7 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.LibraryRepository;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

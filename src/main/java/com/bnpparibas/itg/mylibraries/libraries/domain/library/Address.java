@@ -1,6 +1,7 @@
 package com.bnpparibas.itg.mylibraries.libraries.domain.library;
 
 import com.bnpparibas.itg.mylibraries.libraries.domain.ddd.DDD;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.Objects;
 
