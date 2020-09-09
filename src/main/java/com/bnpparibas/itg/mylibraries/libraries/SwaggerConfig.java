@@ -1,6 +1,8 @@
 package com.bnpparibas.itg.mylibraries.libraries;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.google.common.base.Predicates;
+import io.swagger.models.Response;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,10 +18,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Collections.singleton;
 
@@ -33,7 +32,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(("")))
-                .paths(PathSelectors.none())
+                .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
                 .securitySchemes(Arrays.asList(securityScheme()))
